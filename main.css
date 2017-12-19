@@ -15,7 +15,7 @@ div.wrapper {
   "voting-controls";
 }
 
-@media screen and (min-width: 500px) and (max-width: 799px){
+@media screen and (min-width: 600px) and (max-width: 799px){
   div.wrapper {
     grid-template-columns: 1fr, 100px;
     grid-template-areas:
@@ -52,7 +52,7 @@ div.wrapper {
 }
 
 .selected-candidate-meta {
-  grid-area: selected-candidate-meta
+  grid-area: selected-candidate-meta;
 }
 
 .voting-controls {
@@ -62,6 +62,7 @@ div.wrapper {
 ul.nav li {
   list-style-type: none;
   border-radius: 5px;
+  padding: 5px;
 }
 
 li.selected-candidate {
