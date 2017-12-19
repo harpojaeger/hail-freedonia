@@ -1,0 +1,18 @@
+body {
+  font-family: "Open Sans", arial;
+  padding: 0;
+}
+
+div.wrapper {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 100px 200px auto;
+}
+
+div.heading {
+  padding-top: 1em;
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 1;
+  text-align: center;
+  font-size: 2em;
+}
