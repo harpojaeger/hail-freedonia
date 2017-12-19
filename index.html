@@ -20,26 +20,29 @@
     <div class="heading">
       Choose your candidate:
     </div>
-    <div class="selected-candidate-meta">
-    </div>
+    <div class="selected-candidate-meta"></div>
   </div>
 
 
   <script type="text/javascript">
   $(document).ready( () => {
     const grid = $('div.wrapper')
+    const selectedCandidateMeta = $('div.selected-candidate-meta')
     $.ajax("candidates.csv", {dataType: "text"})
     .done( (data) => {
       const candidates = $.csv.toObjects(data)
       $.each(candidates, (i, candidate) => {
         var candidateMeta = $('<div>')
         .addClass('candidate')
-        .text(candidate.bio)
-        .click(() => {
+        .addClass('candidate-' + i)
+        .text(candidate.first_name + ' ' + candidate.last_name)
+        .click(function() {
           console.log('you clicked on candidate',i)
+          $(selectedCandidateMeta).text(candidate.bio)
+          $('div.candidate').removeClass('selected-candidate')
+          $(this).addClass('selected-candidate')
         })
         .appendTo(grid)
-        console.log('candidate ', i, candidate)
       })
     })
   })
