@@ -52,3 +52,6 @@ div.selected-candidate-meta {
   grid-column: 2 / span 3;
   grid-row: 4;
 }
+div.selected-candidate-party, div.selected-candidate-district {
+  font-weight: bold;
+}
