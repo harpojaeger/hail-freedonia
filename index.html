@@ -28,7 +28,10 @@
       <div class="selected-candidate-district"></div>
       <div class="selected-candidate-bio"></div>
     </div>
-    <div class="voting-controls">i'm the voting controls</div>
+    <div class="voting-controls">
+      <div class="vote-confirmation-text"></div>
+      <button class="vote-button">test button text</button>
+    </div>
   </div>
 
 
@@ -38,14 +41,24 @@
     const selectedCandidateParty = $('div.selected-candidate-party')
     const selectedCandidateDistrict = $('div.selected-candidate-district')
     const selectedCandidateBio = $('div.selected-candidate-bio')
+    const votingControls = $('div.voting-controls')
+    const voteButton = $('button.vote-button')
+
+    votingControls.on('selectedCandidateUpdated', function(){
+      let selectedCandidate = $(this).data().selectedCandidate
+      $(voteButton)
+      .text('Cast your vote for ' + selectedCandidate)
+    })
+
     $.ajax("candidates.csv", {dataType: "text"})
     .done( (data) => {
       const candidates = $.csv.toObjects(data)
       $.each(candidates, (i, candidate) => {
+        let fullName = candidate.first_name + ' ' + candidate.last_name
         var candidateMeta = $('<li>')
         .addClass('candidate')
         // .addClass('candidate-' +  i)
-        .text(candidate.first_name + ' ' + candidate.last_name)
+        .text(fullName)
         .click(function() {
           console.log('you clicked on candidate',i)
           $(selectedCandidateParty).text("Party: " + candidate.party)
@@ -53,6 +66,9 @@
           $(selectedCandidateBio).text(candidate.bio)
           $('li.candidate').removeClass('selected-candidate')
           $(this).addClass('selected-candidate')
+          $(votingControls)
+          .data('selectedCandidate', fullName)
+          .trigger('selectedCandidateUpdated')
         })
         .appendTo(nav)
       })
