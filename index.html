@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>2017 Freedonia Election</title>
+  <meta charset="utf-8"/>
   <meta name="viewport" content="initial-scale=1.0">
 
   <!-- uncompressed jquery -->
@@ -24,7 +25,13 @@
 
 
   <script type="text/javascript">
+  $(document).ready( () => {
+    $.ajax("candidates.csv", {dataType: "text"})
+    .done( (data) => {
+      const candidates = $.csv.toObjects(data)
 
+    })
+  })
   </script>
 </body>
 </html>
