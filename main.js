@@ -41,7 +41,7 @@ $(document).ready( () => {
     })
     // Freeze the selected candidate in color
     $('li.selected-candidate').css({
-      'background-color': '#009905',
+      'background-color': '#006700',
       'color' : 'white'
     })
     // easter egg!

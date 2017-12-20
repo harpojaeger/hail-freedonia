@@ -51,6 +51,11 @@ div.wrapper {
   font-size: 2em;
 }
 
+h1 {
+  font-size: 1em;
+  margin: 0;
+}
+
 .nav {
   grid-area: nav;
   padding: 0px;
@@ -76,12 +81,12 @@ div.wrapper {
 	border: 3px #c00;
 	font-size: 1em;
   color: white;
-  background-color: #00b806;
+  background-color: #006700;
   margin: .5em 0 0 0;
 }
 
 .vote-button:hover {
-  background-color: #009905;
+  background-color: #003800;
 }
 
 ul.nav li {
