@@ -2,6 +2,7 @@ $(document).ready( () => {
   const nav = $('ul.nav')
   const candidateMeta = $('div.candidate-meta')
   const votingControls = $('div.voting-controls')
+  const voteCTA = $('div.vote-cta')
   const voteConfirmationText = $('div.vote-confirmation-text')
   const voteConfirmationCandidateName = $('span.vote-confirmation-candidate-name')
   const voteButton = $('button.vote-button')
@@ -15,12 +16,15 @@ $(document).ready( () => {
     .text('Vote for ' + selectedCandidate)
     // need to use display: block so the margins work
     .css('display', 'block')
+    $(voteCTA).show();
+    $(voteConfirmationText).hide()
   })
   .on('confirmCandidate', function() {
     console.log('confirming')
     let candidateName = $(this).data().selectedCandidate
     $(voteConfirmationCandidateName).text(candidateName)
-    $(voteConfirmationText).slideDown()
+    $(voteCTA).hide()
+    $(voteConfirmationText).show()
     $(voteButton).text('Yes, I want to vote for ' + candidateName)
     $(this).data('nextAction', 'castVote')
   })
@@ -31,7 +35,7 @@ $(document).ready( () => {
   .on('voteProcessed', function () {
     console.log('voted')
     // Hide
-    $(votingControls).slideUp()
+    $(votingControls).fadeOut()
     // Freeze the nav
     $(tabs).each(function() {
       $(this)
@@ -48,7 +52,7 @@ $(document).ready( () => {
       window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY"
     })
     // Replace the candidate description with a confirmation message.
-    $(candidateMeta).slideUp(400, function(){
+    $(candidateMeta).fadeOut(400, function(){
       $(this)
       .text('Thank you! Your vote has been recorded.')
       .show()
@@ -124,7 +128,6 @@ $(document).ready( () => {
           nextAction: 'confirmCandidate',
         })
         .trigger('selectedCandidateUpdated')
-        $(voteConfirmationText).slideUp()
       })
       .append(a)
       $(li).appendTo(nav)

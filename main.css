@@ -69,6 +69,10 @@ h1 {
   margin-bottom: 0.5em;
 }
 
+.vote-cta {
+  display: none;
+}
+
 .vote-button {
   display: none;
 	padding: 10px;
