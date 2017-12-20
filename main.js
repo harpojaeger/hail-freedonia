@@ -80,8 +80,10 @@ $(document).ready( () => {
       .attr({
         'role': 'tab',
         'aria-selected': 'false',
+        // need to add aria-controls in here once refactoring is complete
       })
       .click(function() {
+        // refactor these to simply show their own divs
         $(selectedCandidateParty).text("Party: " + candidate.party)
         $(selectedCandidateDistrict).text("District: " + candidate.electoral_district)
         $(selectedCandidateBio).text(candidate.bio)
