@@ -44,15 +44,15 @@ $(document).ready( () => {
       'background-color': '#009905',
       'color' : 'white'
     })
+    // easter egg!
+    .dblclick( () => {
+      window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY"
+    })
     // Replace the candidate description with a confirmation message.
     $(selectedCandidateMeta).slideUp(400, function(){
       $(this)
       .text('Thank you! Your vote has been recorded.')
       .show()
-      // easter egg!
-      .dblclick( () => {
-        window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY"
-      })
     })
   })
 
