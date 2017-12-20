@@ -1,13 +1,12 @@
 $(document).ready( () => {
   const nav = $('ul.nav')
-  const selectedCandidateMeta = $('div.selected-candidate-meta')
-  const selectedCandidateParty = $('div.selected-candidate-party')
-  const selectedCandidateDistrict = $('div.selected-candidate-district')
-  const selectedCandidateBio = $('div.selected-candidate-bio')
+  const candidateMeta = $('div.candidate-meta')
   const votingControls = $('div.voting-controls')
   const voteConfirmationText = $('div.vote-confirmation-text')
   const voteConfirmationCandidateName = $('span.vote-confirmation-candidate-name')
   const voteButton = $('button.vote-button')
+  var bios = []
+  var tabs = []
 
   $(votingControls).on('selectedCandidateUpdated', function(){
     console.log($(this).data())
@@ -34,7 +33,7 @@ $(document).ready( () => {
     // Hide
     $(votingControls).slideUp()
     // Freeze the nav
-    $(nav).children().each(function() {
+    $(tabs).each(function() {
       $(this)
       .unbind('click')
       .css({cursor: 'auto'})
@@ -49,7 +48,7 @@ $(document).ready( () => {
       window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY"
     })
     // Replace the candidate description with a confirmation message.
-    $(selectedCandidateMeta).slideUp(400, function(){
+    $(candidateMeta).slideUp(400, function(){
       $(this)
       .text('Thank you! Your vote has been recorded.')
       .show()
@@ -74,6 +73,25 @@ $(document).ready( () => {
     $.each(candidates, (i, candidate) => {
       let fullName = candidate.first_name + ' ' + candidate.last_name
       const a = $('<a href="javascript:;">').text(fullName)
+      const party = $('<div>')
+      .addClass('candidate-party')
+      .text('Party: ' + candidate.party)
+
+      const district = $('<div>')
+      .addClass('candidate-district')
+      .text('District: ' + candidate.electoral_district)
+
+      const bio = $('<div>')
+      .addClass('candidate-meta')
+      .hide()
+      .text(candidate.bio)
+      .prepend(district)
+      .prepend(party)
+      .attr('role', 'tabpanel')
+      .appendTo(candidateMeta)
+
+      bios.push(bio)
+
       const li = $('<li>')
       .addClass('candidate')
       // add some ARIA attrs
@@ -83,14 +101,18 @@ $(document).ready( () => {
         // need to add aria-controls in here once refactoring is complete
       })
       .click(function() {
-        // refactor these to simply show their own divs
-        $(selectedCandidateParty).text("Party: " + candidate.party)
-        $(selectedCandidateDistrict).text("District: " + candidate.electoral_district)
-        $(selectedCandidateBio).text(candidate.bio)
+        // toggle bio visibility
+        $.each(bios, function() {
+          $(this).hide()
+        })
+        $(bio).show()
+
         // manage the unselected <li>s
-        $('li.candidate')
-        .removeClass('selected-candidate')
-        .attr('aria-selected','false')
+        $.each(tabs, function() {
+          $(this)
+          .removeClass('selected-candidate')
+          .attr('aria-selected','false')
+        })
 
         // select this <li>
         $(this)
@@ -106,6 +128,7 @@ $(document).ready( () => {
       })
       .append(a)
       $(li).appendTo(nav)
+      tabs.push(li)
     })
   })
 })

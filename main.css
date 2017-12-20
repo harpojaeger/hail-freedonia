@@ -105,6 +105,6 @@ li.selected-candidate {
   background-color: #ddd;
 }
 
-div.selected-candidate-party, div.selected-candidate-district {
+div.candidate-party, div.candidate-district {
   font-weight: bold;
 }
