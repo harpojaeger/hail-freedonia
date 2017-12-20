@@ -67,6 +67,10 @@ $(document).ready( () => {
   })
 
   $.ajax("candidates.csv", {dataType: "text"})
+  .fail( (xhr, status, err) => {
+    console.log('Error loading CSV:', status)
+    alert('Candidate data could not be loaded. Please try again later.')
+  })
   .done( (data) => {
     // JSONify the candidate data and sort by last name
     const candidates = $.csv.toObjects(data).sort( (a,b) => {
