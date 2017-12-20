@@ -96,6 +96,11 @@ ul.nav li {
   cursor: pointer;
 }
 
+ul.nav li a {
+  text-decoration: none;
+  color: inherit;
+}
+
 li.selected-candidate {
   background-color: #ddd;
 }

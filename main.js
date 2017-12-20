@@ -73,10 +73,9 @@ $(document).ready( () => {
     })
     $.each(candidates, (i, candidate) => {
       let fullName = candidate.first_name + ' ' + candidate.last_name
-      var candidateMeta = $('<li>')
+      const a = $('<a href="javascript:;">').text(fullName)
+      const li = $('<li>')
       .addClass('candidate')
-      // .addClass('candidate-' +  i)
-      .text(fullName)
       .click(function() {
         $(selectedCandidateParty).text("Party: " + candidate.party)
         $(selectedCandidateDistrict).text("District: " + candidate.electoral_district)
@@ -91,7 +90,8 @@ $(document).ready( () => {
         .trigger('selectedCandidateUpdated')
         $(voteConfirmationText).slideUp()
       })
-      .appendTo(nav)
+      .append(a)
+      $(li).appendTo(nav)
     })
   })
 })
