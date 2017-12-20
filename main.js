@@ -65,7 +65,12 @@ $(document).ready( () => {
 
   $.ajax("candidates.csv", {dataType: "text"})
   .done( (data) => {
-    const candidates = $.csv.toObjects(data)
+    // JSONify the candidate data and sort by last name
+    const candidates = $.csv.toObjects(data).sort( (a,b) => {
+      if(a.last_name.toUpperCase() < b.last_name.toUpperCase()) return -1
+      if(a.last_name.toUpperCase() > b.last_name.toUpperCase()) return 1
+      return 0
+    })
     $.each(candidates, (i, candidate) => {
       let fullName = candidate.first_name + ' ' + candidate.last_name
       var candidateMeta = $('<li>')
