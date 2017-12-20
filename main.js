@@ -76,12 +76,24 @@ $(document).ready( () => {
       const a = $('<a href="javascript:;">').text(fullName)
       const li = $('<li>')
       .addClass('candidate')
+      // add some ARIA attrs
+      .attr({
+        'role': 'tab',
+        'aria-selected': 'false',
+      })
       .click(function() {
         $(selectedCandidateParty).text("Party: " + candidate.party)
         $(selectedCandidateDistrict).text("District: " + candidate.electoral_district)
         $(selectedCandidateBio).text(candidate.bio)
-        $('li.candidate').removeClass('selected-candidate')
-        $(this).addClass('selected-candidate')
+        // manage the unselected <li>s
+        $('li.candidate')
+        .removeClass('selected-candidate')
+        .attr('aria-selected','false')
+
+        // select this <li>
+        $(this)
+        .addClass('selected-candidate')
+        .attr('aria-selected', 'true')
         $(votingControls)
         .data({
           selectedCandidate: fullName,
