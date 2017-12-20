@@ -34,7 +34,7 @@ $(document).ready( () => {
   })
   .on('voteProcessed', function () {
     console.log('voted')
-    // Hide
+    // Hide voting controls
     $(votingControls).fadeOut()
     // Freeze the nav
     $(tabs).each(function() {
@@ -91,7 +91,10 @@ $(document).ready( () => {
       .text(candidate.bio)
       .prepend(district)
       .prepend(party)
-      .attr('role', 'tabpanel')
+      .attr({
+        'role': 'tabpanel',
+        'id': 'meta-' + i,
+      })
       .appendTo(candidateMeta)
 
       bios.push(bio)
@@ -102,7 +105,7 @@ $(document).ready( () => {
       .attr({
         'role': 'tab',
         'aria-selected': 'false',
-        // need to add aria-controls in here once refactoring is complete
+        'aria-controls': 'meta-' + i,
       })
       .click(function() {
         // toggle bio visibility
