@@ -20,7 +20,7 @@ div.wrapper {
     grid-template-columns: 1fr 150px;
     grid-template-areas:
     "header header"
-    "nav null"
+    "nav nav"
     "selected-candidate-meta voting-controls";
   }
   .nav {
