@@ -13,6 +13,7 @@
   <!-- uncompressed jquery-csv -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv.min.js">
   </script>
+  <script type="text/javascript" src="main.js"></script>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -29,51 +30,9 @@
       <div class="selected-candidate-bio"></div>
     </div>
     <div class="voting-controls">
-      <div class="vote-confirmation-text"></div>
-      <button class="vote-button">test button text</button>
+      <div class="vote-confirmation-text">Do you want to cast your vote for <span class="vote-confirmation-candidate-name"></span>? Remember, you can only vote once.</div>
+      <button class="vote-button"></button>
     </div>
   </div>
-
-
-  <script type="text/javascript">
-  $(document).ready( () => {
-    const nav = $('ul.nav')
-    const selectedCandidateParty = $('div.selected-candidate-party')
-    const selectedCandidateDistrict = $('div.selected-candidate-district')
-    const selectedCandidateBio = $('div.selected-candidate-bio')
-    const votingControls = $('div.voting-controls')
-    const voteButton = $('button.vote-button')
-
-    votingControls.on('selectedCandidateUpdated', function(){
-      let selectedCandidate = $(this).data().selectedCandidate
-      $(voteButton)
-      .text('Cast your vote for ' + selectedCandidate)
-    })
-
-    $.ajax("candidates.csv", {dataType: "text"})
-    .done( (data) => {
-      const candidates = $.csv.toObjects(data)
-      $.each(candidates, (i, candidate) => {
-        let fullName = candidate.first_name + ' ' + candidate.last_name
-        var candidateMeta = $('<li>')
-        .addClass('candidate')
-        // .addClass('candidate-' +  i)
-        .text(fullName)
-        .click(function() {
-          console.log('you clicked on candidate',i)
-          $(selectedCandidateParty).text("Party: " + candidate.party)
-          $(selectedCandidateDistrict).text("District: " + candidate.electoral_district)
-          $(selectedCandidateBio).text(candidate.bio)
-          $('li.candidate').removeClass('selected-candidate')
-          $(this).addClass('selected-candidate')
-          $(votingControls)
-          .data('selectedCandidate', fullName)
-          .trigger('selectedCandidateUpdated')
-        })
-        .appendTo(nav)
-      })
-    })
-  })
-  </script>
 </body>
 </html>

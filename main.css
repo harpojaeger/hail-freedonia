@@ -7,17 +7,17 @@ body {
 div.wrapper {
   padding: 0 10px;
   display: grid;
-  grid-row-gap: 10px;
+  grid-gap: 10px;
   grid-template-areas:
   "header"
   "nav"
+  "voting-controls"
   "selected-candidate-meta"
-  "voting-controls";
 }
 
 @media screen and (min-width: 600px) and (max-width: 799px){
   div.wrapper {
-    grid-template-columns: 1fr, 100px;
+    grid-template-columns: 1fr 150px;
     grid-template-areas:
     "header header"
     "nav nav"
@@ -59,10 +59,30 @@ div.wrapper {
   grid-area: voting-controls;
 }
 
+.vote-confirmation-text {
+  display: none;
+}
+
+.vote-button {
+  display: none;
+	padding: 10px;
+	border-radius: 10px;
+	border: 3px #c00;
+	font-size: 1em;
+  color: white;
+  background-color: #00b806;
+  margin: .5em auto 0 auto
+}
+
+.vote-button:hover {
+  background-color: #009905;
+}
+
 ul.nav li {
   list-style-type: none;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer;
 }
 
 li.selected-candidate {
