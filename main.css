@@ -71,6 +71,7 @@ h1 {
 
 .vote-cta {
   display: none;
+  margin-bottom: 0.5em;
 }
 
 .vote-button {

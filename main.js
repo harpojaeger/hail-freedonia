@@ -54,7 +54,7 @@ $(document).ready( () => {
     // Replace the candidate description with a confirmation message.
     $(candidateMeta).fadeOut(400, function(){
       $(this)
-      .text('Thank you! Your vote has been recorded.')
+      .text('Your vote has been recorded. Hail, hail Freedonia!')
       .show()
     })
   })
