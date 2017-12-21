@@ -49,7 +49,7 @@ $(document).ready( () => {
     })
     // easter egg!
     .dblclick( () => {
-      window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY"
+      window.location.href="https://www.youtube.com/watch?v=wiUlDEw9yLY&feature=youtu.be&t=40s"
     })
     // Replace the candidate description with a confirmation message.
     $(candidateMeta).fadeOut(400, function(){
